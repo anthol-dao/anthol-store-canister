@@ -1,6 +1,6 @@
 use super::{image::ImageVecKey, spec::SpecIndexKey};
 use candid::{CandidType, Deserialize};
-use shared::{
+use common::{
     item::{
         attr::{AttrIndexResponse, AttrIndexesResponse, AttrKey, AttrKeys, AttrType, Stock},
         MediaDataWithCaption,
@@ -70,7 +70,7 @@ pub struct AttrSpecificDataResponse {
     pub stock: Stock,
     pub price: Price,
     pub image_vec: Vec<MediaDataWithCaption>,
-    pub specs: Option<shared::item::spec::SpecResponse>,
+    pub specs: Option<common::item::spec::SpecResponse>,
     pub sale: (),
 }
 

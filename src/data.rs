@@ -1,7 +1,7 @@
 use crate::STORE_DATA;
 use candid::{CandidType, Decode, Deserialize, Encode};
 use ic_stable_structures::{cell::ValueError, storable::Bound, Storable};
-use shared::store::{StoreId, StoreName};
+use common::store::{StoreId, StoreName};
 use std::borrow::Cow;
 
 #[derive(CandidType, Deserialize, Debug, Clone)]

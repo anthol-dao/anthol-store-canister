@@ -1,5 +1,5 @@
 use candid::{CandidType, Deserialize};
-use shared::item::spec::SpecValue;
+use common::item::spec::SpecValue;
 use std::collections::BTreeMap;
 
 type SpecCategoryKey = u8;
@@ -57,7 +57,7 @@ impl SpecLabel {
         SpecLabelBuilder::new(name)
     }
 
-    pub fn get_value(&self, key: &SpecValueKey) -> Option<&shared::item::spec::SpecValue> {
+    pub fn get_value(&self, key: &SpecValueKey) -> Option<&common::item::spec::SpecValue> {
         self.value_map.get(key)
     }
 }
@@ -160,7 +160,7 @@ impl ItemSpecsV1 {
         ItemSpecsV1Builder::default()
     }
 
-    pub fn get_specs(&self, keys: &Vec<SpecIndexKey>) -> Option<shared::item::spec::SpecResponse> {
+    pub fn get_specs(&self, keys: &Vec<SpecIndexKey>) -> Option<common::item::spec::SpecResponse> {
         let mut result = Vec::new();
 
         for key in keys {
@@ -171,13 +171,13 @@ impl ItemSpecsV1 {
             for spec_key_label in &spec_key.label_vec {
                 let label = category.get_label(spec_key_label.label_key)?;
                 let value = label.get_value(&spec_key_label.value_key)?;
-                label_vec.push(shared::item::spec::SpecResponseLabel {
+                label_vec.push(common::item::spec::SpecResponseLabel {
                     label_name: label.name.clone(),
                     value: value.clone(),
                 });
             }
 
-            result.push(shared::item::spec::SpecResponseCategory {
+            result.push(common::item::spec::SpecResponseCategory {
                 category_name: category.name.clone(),
                 label_vec,
             });

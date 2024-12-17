@@ -3,7 +3,7 @@ use crate::data::StoreData;
 use super::{ITEMS, ITEMS_IN_ID, STORE_DATA};
 use candid::{CandidType, Decode, Deserialize, Encode};
 use ic_stable_structures::{storable::Bound, Storable};
-pub use shared::{
+pub use common::{
     item::{
         attr::{AttrKeys, AttrStatusResponse, AttrStatusesResponse},
         ItemCoreDataRequest, ItemId, ItemKey, ItemName, ItemPageFromStoreErrorCode,
@@ -94,26 +94,23 @@ impl Item {
                 indexes
                     .iter()
                     .enumerate()
-                    .for_each(|(i, index)| match index {
-                        Some(index) => {
-                            let mut each_result = Vec::new();
+                    .for_each(|(i, index)| if let Some(index) = index {
+                        let mut each_result = Vec::new();
 
-                            index.value.iter().enumerate().for_each(|(j, _)| {
-                                let attr_keys = attr_keys.replace(i, &(j as u8)).unwrap();
-                                match attrs.map.get(&attr_keys) {
-                                    Some(attr_data) => {
-                                        let is_in_stock = attr_data.stock > 0;
-                                        each_result.push(Some(AttrStatusResponse { is_in_stock }));
-                                    }
-                                    None => {
-                                        each_result.push(None);
-                                    }
+                        index.value.iter().enumerate().for_each(|(j, _)| {
+                            let attr_keys = attr_keys.replace(i, &(j as u8)).unwrap();
+                            match attrs.map.get(&attr_keys) {
+                                Some(attr_data) => {
+                                    let is_in_stock = attr_data.stock > 0;
+                                    each_result.push(Some(AttrStatusResponse { is_in_stock }));
                                 }
-                            });
+                                None => {
+                                    each_result.push(None);
+                                }
+                            }
+                        });
 
-                            result[i] = each_result;
-                        }
-                        None => {}
+                        result[i] = each_result;
                     });
             }
         }

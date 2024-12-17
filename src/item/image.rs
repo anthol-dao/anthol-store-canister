@@ -1,5 +1,5 @@
 use candid::{CandidType, Deserialize};
-use shared::item::MediaDataWithCaption;
+use common::item::MediaDataWithCaption;
 use std::collections::BTreeMap;
 
 type ImageKey = u8;

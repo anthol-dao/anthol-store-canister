@@ -7,7 +7,7 @@ use ic_stable_structures::{
     memory_manager::{MemoryId, MemoryManager, VirtualMemory},
     DefaultMemoryImpl, StableBTreeMap, StableCell, StableLog,
 };
-use shared::{
+use common::{
     item::{
         ItemId, ItemKey, ItemPageFromStoreErrorCode, ItemPageRequestToStoreCanister,
         ItemPageResponseFromStoreCanister,

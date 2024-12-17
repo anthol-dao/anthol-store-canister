@@ -8,7 +8,7 @@ edition = "2021"
 crate-type = ["cdylib", "rlib"]
 
 [dependencies]
-shared.workspace = true
+common.workspace = true
 anyhow = { workspace = true, features = ["backtrace", "std"] }
 canbench-rs = { workspace = true, optional = true }
 candid.workspace = true
